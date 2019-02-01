@@ -8,13 +8,20 @@ export function setCurrentUser(user) {
     user
   };
 }
-const serverURL = "https://abbey-today-xiaohuan123.c9users.io:8081"
+
+export function logout() {
+  return dispatch => {
+    localStorage.clear();
+    dispatch(setCurrentUser({}));
+  };
+}
+const url = "https://abbey-today-xiaohuan123.c9users.io:8081";
 
 export function authUser(type, userData) {
   return dispatch => {
     // wrap our thunk in a promise so we can wait for the API call
     return new Promise((resolve, reject) => {
-      return apiCall("post", `${serverURL}/api/auth/${type}`, userData)
+      return apiCall("post", `${url}/api/auth/${type}`, userData)
         .then(({ token, ...user }) => {
           localStorage.setItem("jwtToken", token);
           dispatch(setCurrentUser(user));
