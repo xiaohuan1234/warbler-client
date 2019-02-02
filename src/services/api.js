@@ -7,10 +7,10 @@ export function setTokenHeader(token) {
     delete axios.defaults.headers.common["Authorization"];
   }
 }
-
+const SERVER_URL="https://abbey-today-xiaohuan123.c9users.io:8081";
 export function apiCall(method, path, data) {
   return new Promise((resolve, reject) => {
-    return axios[method](path, data)
+    return axios[method.toLowerCase()](SERVER_URL+path, data)
       .then(res => {
         return resolve(res.data);
       })

@@ -21,13 +21,11 @@ export function logout() {
   };
 }
 
-const url = "https://abbey-today-xiaohuan123.c9users.io:8081";
-
 export function authUser(type, userData) {
   return dispatch => {
     // wrap our thunk in a promise so we can wait for the API call
     return new Promise((resolve, reject) => {
-      return apiCall("post", `${url}/api/auth/${type}`, userData)
+      return apiCall("post", `/api/auth/${type}`, userData)
         .then(({ token, ...user }) => {
           localStorage.setItem("jwtToken", token);
           setAuthorizationToken(token);
